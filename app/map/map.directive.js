@@ -18,31 +18,31 @@ function map ($compile, $http, $timeout) {
 
     function linkFunc(scope, element, attrs) {
 
-        scope.vm.anchor = new google.maps.MVCObject();
-        scope.vm.checkIn = checkIn;
-        scope.vm.currentLocation = {latitude: 42.5673029, longitude: -87.9162311};
-        scope.vm.getMarkerIcon = getMarkerIcon;
-        scope.vm.infoContent = $compile(
+        scope.map.anchor = new google.maps.MVCObject();
+        scope.map.checkIn = checkIn;
+        // scope.map.currentLocation = {latitude: 42.5673029, longitude: -87.9162311};
+        scope.map.getMarkerIcon = getMarkerIcon;
+        scope.map.infoContent = $compile(
             '<div class="checkin-container">'+
-            '<h5>{{vm.location.getProperty("name")}}</h5>'+
-            '<p><small>Last visit: {{ vm.location.getProperty("last_checkin") | date : \'short\'}}</small></p>'+
-            '<button class="btn btn-primary btn-lg" ng-click="vm.checkIn();">Steve Was Here</button>'+
+            '<h5>{{map.location.getProperty("name")}}</h5>'+
+            '<p><small>Last visit: {{ map.location.getProperty("last_checkin") | date : \'short\'}}</small></p>'+
+            '<button class="btn btn-primary btn-lg" ng-click="map.checkIn();">Steve Was Here</button>'+
             '</div>')(scope);
-            scope.vm.infoWindow = new google.maps.InfoWindow(
+            scope.map.infoWindow = new google.maps.InfoWindow(
             {
-                content: scope.vm.infoContent[0],
+                content: scope.map.infoContent[0],
                 pixelOffset: new google.maps.Size(0, -32)
             }
             );
-            scope.vm.map = null;
+            scope.map.map = null;
 
             google.maps.event.addDomListener(window, 'load', getCurrentLocation);
 
         //////////
 
         function addMapData (data) {
-            scope.vm.locations = data;
-            scope.vm.map.data.addGeoJson(scope.vm.locations);
+            scope.map.locations = data;
+            scope.map.map.data.addGeoJson(scope.map.locations);
             setMarkerStyle();
             registerClickEvents();
 
@@ -54,35 +54,36 @@ function map ($compile, $http, $timeout) {
                 openInfoWindow(nearbyLocations[0]);
             }
 
-            scope.vm.loading = false;
+            scope.map.loading = false;
         }
 
         function checkIn () {
-            scope.vm.now = Date.now();
-            scope.vm.location.setProperty('last_checkin', scope.vm.now);
-            setMarkerStyle();
-            $http.post('./dataservice.php', scope.vm.locations)
-            .success(function(data){
-                scope.vm.success = true;
-                scope.vm.timeout = $timeout(function() {
-                    scope.vm.success = false;
-                }, 2500);
-                scope.vm.infoWindow.close();
-            });
+            console.log('check in')
+            // scope.map.now = Date.now();
+            // scope.map.location.setProperty('last_checkin', scope.map.now);
+            // setMarkerStyle();
+            // $http.post('./dataservice.php', scope.map.locations)
+            // .success(function(data){
+            //     scope.map.success = true;
+            //     scope.map.timeout = $timeout(function() {
+            //         scope.map.success = false;
+            //     }, 2500);
+            //     scope.map.infoWindow.close();
+            // });
         }
 
         function findNearby () {
-            var locations = scope.vm.locations.features;
+            var locations = scope.map.locations.features;
             var nearbyLocations = [];
 
             for(var i = 0; i < locations.length; i++){
                 var d = getDistance(
-                    scope.vm.currentLocation.latitude,
-                    scope.vm.currentLocation.longitude,
+                    scope.map.currentLocation.latitude,
+                    scope.map.currentLocation.longitude,
                     locations[i].geometry.coordinates[1],
                     locations[i].geometry.coordinates[0]);
                 if(d < 5){
-                    var feature = scope.vm.map.data.getFeatureById(scope.vm.locations.features[i].id);
+                    var feature = scope.map.map.data.getFeatureById(scope.map.locations.features[i].id);
                     feature.setProperty('nearbyDistance', d);
                     nearbyLocations.push(feature);
                 }
@@ -100,7 +101,7 @@ function map ($compile, $http, $timeout) {
             navigator.geolocation.getCurrentPosition(success, error, options);
 
             function success (pos) {
-                scope.vm.currentLocation = pos.coords;
+                scope.map.currentLocation = pos.coords;
                 initialize();
             }
 
@@ -121,9 +122,9 @@ function map ($compile, $http, $timeout) {
         }
 
         function getMarkerIcon (lastCheckin) {
-            var diff = (scope.vm.now - lastCheckin) / (1000 * 60 * 60 * 24);
-            if (diff < scope.vm.maxDays) {
-                var h = 120 - ( (diff / scope.vm.maxDays) * 120);
+            var diff = (scope.map.now - lastCheckin) / (1000 * 60 * 60 * 24);
+            if (diff < scope.map.maxDays) {
+                var h = 120 - ( (diff / scope.map.maxDays) * 120);
                 var hex = colorService().hsvToHex(h, 100, 100);
                 return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=|'+hex;
             } else {
@@ -133,35 +134,36 @@ function map ($compile, $http, $timeout) {
 
         function initialize () {
             var mapOptions = {
-                center: { lat: scope.vm.currentLocation.latitude, lng: scope.vm.currentLocation.longitude },
+                center: { lat: scope.map.currentLocation.latitude, lng: scope.map.currentLocation.longitude },
                 zoom: 13
             };
-            scope.vm.map = new google.maps.Map(document.getElementById('map'), mapOptions);
-            scope.vm.getLocations().then(addMapData);
+            scope.map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            scope.map.getLocations().then(addMapData);
         }
 
         function openInfoWindow (feature) {
-            scope.vm.location = feature;
-            scope.vm.anchor.set('position',feature.j.j);
-            scope.vm.infoWindow.open(scope.vm.map,scope.vm.anchor);
+            scope.map.location = feature;
+            scope.map.anchor.set('position',feature.j.j);
+            scope.map.infoWindow.open(scope.map.map,scope.map.anchor);
         }
 
         function registerClickEvents (argument) {
-            scope.vm.map.data.addListener('click', function(event) {
-                scope.vm.location = event.feature;
-                // console.log(scope.vm.location);
+            scope.map.map.data.addListener('click', function(event) {
+                console.log(event);
+                scope.map.location = event.feature;
+                // console.log(scope.map.location);
 
                 scope.$apply();
                 var anchor = new google.maps.MVCObject();
                 anchor.set('position',event.latLng);
-                scope.vm.infoWindow.open(scope.vm.map,anchor);
+                scope.map.infoWindow.open(scope.map.map,anchor);
             });
         }
 
         function setMarkerStyle () {
-            scope.vm.map.data.setStyle(function(feature) {
+            scope.map.map.data.setStyle(function(feature) {
                 var lastCheckin = feature.getProperty('last_checkin');
-                var icon = scope.vm.getMarkerIcon(lastCheckin);
+                var icon = scope.map.getMarkerIcon(lastCheckin);
                 return {
                     icon: icon
                 };

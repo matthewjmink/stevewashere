@@ -15,7 +15,7 @@
             {
                 state: 'map',
                 config: {
-                    url: '/map',
+                    url: '/',
                     templateUrl: '/map/map.html',
                     controller: 'MapController',
                     controllerAs: 'map',

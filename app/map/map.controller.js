@@ -4,8 +4,8 @@
     angular.module('app.map')
         .controller('MapController', MapController);
 
-    MapController.$inject = ['$http'];
-    function MapController($http) {
+    MapController.$inject = ['dataservice'];
+    function MapController(dataservice) {
         var vm = this;
 
         vm.getLocations = getLocations;
@@ -17,15 +17,8 @@
 
         ////////////
 
-        function getLocations () {
-            var get = $http.get('./data.json?d='+vm.now);
-            return{
-                then: function(callback){
-                    get.success(function(data){
-                        callback(data);
-                    });
-                }
-            };
+        function getLocations() {
+            return dataservice.getLocations();
         }
     }
 })();
