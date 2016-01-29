@@ -1,0 +1,24 @@
+{
+  "name": "stevewashere",
+  "version": "2.0.1",
+  "homepage": "https://github.com/matthewjmink/stevewashere",
+  "authors": [
+    "Matt Mink <matthewjmink@gmail.com>"
+  ],
+  "description": "Angular/Firebase/Google Maps web application that allows sales reps and service techs to 'check-in' at their client locations",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.9",
+    "angular-animate": "~1.4.9",
+    "bootstrap": "~3.3.6"
+  }
+}

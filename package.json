@@ -1,0 +1,25 @@
+{
+  "name": "stevewashere",
+  "version": "2.0.1",
+  "description": "Angular/Firebase/Google Maps web application that allows sales reps and service techs to 'check-in' at their client locations",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthewjmink/stevewashere.git"
+  },
+  "author": "Matt Mink",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matthewjmink/stevewashere/issues"
+  },
+  "homepage": "https://github.com/matthewjmink/stevewashere#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-useref": "^3.0.5",
+    "wiredep": "^3.0.0"
+  }
+}

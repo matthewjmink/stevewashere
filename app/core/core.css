@@ -1,0 +1,76 @@
+html, body, #map {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.checkin-container {
+  text-align: center;
+}
+
+.loading {
+  position:fixed;
+  top:0;
+  left:0;
+  background:#fff;
+  text-align:center;
+  height: 100%;
+  width: 100%;
+}
+.loading img {
+  width:50%;
+  max-width:200px;
+  height: auto;
+  position:relative;
+  top: 30%;
+}
+.loading.ng-hide {
+  top: -100%;
+  transition: .5s linear all;
+}
+.success.ng-animate {
+  transition: .25s linear all;
+}
+.success {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding:20px;
+  text-align: center;
+  border-bottom: 3px solid #d6e9c6;
+  color: #3c763d;
+  transition: all linear .5s;
+  background-color: #dff0d8;
+}
+.success.ng-hide {
+  top: -100%;
+}
+.success h2 {
+  padding: 0;
+  margin: 0;
+}
+.success .glyphicon {
+  margin-right: .33em;
+}
+
+@media (max-width: 767px) {
+  .success h2 .glyphicon {
+    display:block;
+    margin-right:auto;
+    margin-left:auto;
+    margin-bottom:.25em;
+    font-size:1.75em;
+    background:rgba(255,255,255,.5);
+    width:1.5em;
+    height: 1.5em;
+    padding:.15em .1em 0 0;
+    border:3px solid;
+    box-sizing:border-box;
+    border-radius:1em;
+    overflow:hidden;
+    text-align:center;
+
+  }
+}
+
