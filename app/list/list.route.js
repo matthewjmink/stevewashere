@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.map')
+        .module('app.list')
         .run(appRun);
 
     appRun.$inject = ['routerHelper'];
@@ -13,12 +13,12 @@
     function getStates() {
         return [
             {
-                state: 'map',
+                state: 'list',
                 config: {
-                    url: '/',
-                    templateUrl: '/map/map.html',
-                    controller: 'MapController',
-                    controllerAs: 'map'
+                    url: '/list',
+                    templateUrl: '/list/list.html',
+                    controller: 'ListController',
+                    controllerAs: 'list'
                 }
             }
         ];

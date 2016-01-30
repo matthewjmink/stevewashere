@@ -7,8 +7,8 @@
 /**
 * Google Map Directive
 */
-map.$inject = ['$compile', '$http', '$timeout'];
-function map ($compile, $http, $timeout) {
+map.$inject = ['colorService', '$compile', '$timeout'];
+function map (colorService, $compile, $timeout) {
     return {
         restrict: 'EA',
         link: linkFunc,
@@ -124,7 +124,7 @@ function map ($compile, $http, $timeout) {
             var diff = (scope.map.now - lastCheckin) / (1000 * 60 * 60 * 24);
             if (diff < scope.map.maxDays) {
                 var h = 120 - ( (diff / scope.map.maxDays) * 120);
-                var hex = colorService().hsvToHex(h, 100, 100);
+                var hex = colorService.hsvToHex(h, 100, 100);
                 return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=|'+hex;
             } else {
                 return 'https://chart.googleapis.com/chart?chst=d_map_pin_letter&chld=|FF0000';
@@ -134,7 +134,10 @@ function map ($compile, $http, $timeout) {
         function initialize () {
             var mapOptions = {
                 center: { lat: scope.map.currentLocation.latitude, lng: scope.map.currentLocation.longitude },
-                zoom: 13
+                zoom: 13,
+                mapTypeControlOptions: {
+                    mapTypeIds: []
+                }
             };
             scope.map.map = new google.maps.Map(document.getElementById('map'), mapOptions);
             scope.map.getLocations().then(addMapData);
@@ -173,79 +176,6 @@ function map ($compile, $http, $timeout) {
                 return 1;
             return 0;
         }
-    }
-}
-
-function colorService(){
-    var trimLeft = /^[\s,#]+/,
-    trimRight = /\s+$/,
-    math = Math,
-    mathRound = math.round,
-    mathMin = math.min,
-    mathMax = math.max,
-    mathRandom = math.random;
-
-    return {
-        hsvToHex: hsvToHex,
-        hsvToRgb: hsvToRgb,
-        rgbToHex: rgbToHex
-    };
-
-    function hsvToHex(h, s, v) {
-        var rgb = hsvToRgb(h, s, v);
-        return rgbToHex(rgb.r, rgb.g, rgb.b);
-    }
-
-    function hsvToRgb(h, s, v) {
-        h = bound01(h, 360) * 6;
-        s = bound01(s, 100);
-        v = bound01(v, 100);
-
-        var i = math.floor(h),
-        f = h - i,
-        p = v * (1 - s),
-        q = v * (1 - f * s),
-        t = v * (1 - (1 - f) * s),
-        mod = i % 6,
-        r = [v, q, p, p, t, v][mod],
-        g = [t, v, v, q, p, p][mod],
-        b = [p, p, t, v, v, q][mod];
-
-        return { r: r * 255, g: g * 255, b: b * 255 };
-    }
-
-    function rgbToHex(r, g, b) {
-        var hex = [
-        pad2(mathRound(r).toString(16)),
-        pad2(mathRound(g).toString(16)),
-        pad2(mathRound(b).toString(16))
-        ];
-        return hex.join('');
-    }
-
-    function bound01(n, max) {
-        if (isOnePointZero(n)) { n = '100%'; }
-        var processPercent = isPercentage(n);
-        n = mathMin(max, mathMax(0, parseFloat(n)));
-        if (processPercent) {
-            n = parseInt(n * max, 10) / 100;
-        }
-        if ((math.abs(n - max) < 0.000001)) {
-            return 1;
-        }
-        return (n % max) / parseFloat(max);
-    }
-
-    function isOnePointZero(n) {
-        return typeof n === 'string' && n.indexOf('.') !== -1 && parseFloat(n) === 1;
-    }
-
-    function isPercentage(n) {
-        return typeof n === 'string' && n.indexOf('%') !== -1;
-    }
-
-    function pad2(c) {
-        return c.length === 1 ? '0' + c : '' + c;
     }
 }
 
