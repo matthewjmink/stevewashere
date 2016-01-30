@@ -20,7 +20,7 @@ function map ($compile, $http, $timeout) {
 
         scope.map.anchor = new google.maps.MVCObject();
         scope.map.checkIn = checkIn;
-        // scope.map.currentLocation = {latitude: 42.5673029, longitude: -87.9162311};
+        scope.map.currentLocation = {latitude: 42.5673029, longitude: -87.9162311};
         scope.map.getMarkerIcon = getMarkerIcon;
         scope.map.infoContent = $compile(
             '<div class="checkin-container">'+
@@ -36,7 +36,7 @@ function map ($compile, $http, $timeout) {
             );
             scope.map.map = null;
 
-            google.maps.event.addDomListener(window, 'load', getCurrentLocation);
+            getCurrentLocation();
 
         //////////
 
@@ -58,18 +58,17 @@ function map ($compile, $http, $timeout) {
         }
 
         function checkIn () {
-            console.log('check in')
-            // scope.map.now = Date.now();
-            // scope.map.location.setProperty('last_checkin', scope.map.now);
-            // setMarkerStyle();
-            // $http.post('./dataservice.php', scope.map.locations)
-            // .success(function(data){
-            //     scope.map.success = true;
-            //     scope.map.timeout = $timeout(function() {
-            //         scope.map.success = false;
-            //     }, 2500);
-            //     scope.map.infoWindow.close();
-            // });
+            scope.map.now = Date.now();
+            scope.map.location.setProperty('last_checkin', scope.map.now);
+            setMarkerStyle();
+            scope.map.updateLocation(scope.map.location.getId())
+                .then(function (response) {
+                    scope.map.success = true;
+                    scope.map.timeout = $timeout(function() {
+                        scope.map.success = false;
+                    }, 2500);
+                    scope.map.infoWindow.close();
+                });
         }
 
         function findNearby () {
@@ -149,10 +148,7 @@ function map ($compile, $http, $timeout) {
 
         function registerClickEvents (argument) {
             scope.map.map.data.addListener('click', function(event) {
-                console.log(event);
                 scope.map.location = event.feature;
-                // console.log(scope.map.location);
-
                 scope.$apply();
                 var anchor = new google.maps.MVCObject();
                 anchor.set('position',event.latLng);
