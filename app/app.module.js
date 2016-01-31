@@ -4,7 +4,9 @@
 
     angular.module('app', [
         'app.core',
-        'app.map'
+        'app.nav',
+        'app.map',
+        'app.list'
     ]);
 
 })();

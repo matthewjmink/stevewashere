@@ -1,0 +1,48 @@
+ui-view {
+    position: relative;
+    left: 0;
+    transition: left linear .1s;
+    padding-top: 50px;
+    display: block;
+}
+#primaryNavigation {
+    width: 0;
+    position: absolute;
+    top:0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    background: #fff;
+    transition: width linear .1s;
+    box-shadow: -2px 0 5px rgba(0,0,0,.3) inset;
+}
+#primaryNavigation > .navbar-toggle{
+    position: absolute;
+    top: 10px;
+    margin:0;
+    left: 100%;
+    margin-left: 10px;
+    background: rgba(0,0,0,.6);
+}
+#primaryNavigation .navbar-toggle .icon-bar {
+    background: #fff;
+}
+#primaryNavigation > div {
+    position: relative;
+    width: 100%;
+    overflow:hidden;
+}
+#primaryNavigation > div > ul.nav {
+    float:right;
+    padding: 10px;
+    width: 230px;
+}
+body.menu-active {
+    overflow: hidden;
+}
+body.menu-active #primaryNavigation {
+    width: 230px;
+}
+body.menu-active ui-view {
+    left: 230px;
+}

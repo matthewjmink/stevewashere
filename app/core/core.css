@@ -1,10 +1,31 @@
-html, body, #map {
+html, body, ui-view, #map {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
 }
-
+body > header {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  background: #fff;
+  color: #47CA41;
+  box-shadow: 0 2px 1px rgba(0,0,0,.1);
+  transition: left linear .1s;
+}
+body.menu-active > header {
+  left: 230px;
+}
+body > header > h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 24px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 14px 60px 10px;
+}
 .checkin-container {
   text-align: center;
 }
@@ -34,7 +55,7 @@ html, body, #map {
 }
 .success {
   position: fixed;
-  top: 0;
+  bottom: 0;
   width: 100%;
   padding:20px;
   text-align: center;
@@ -42,9 +63,10 @@ html, body, #map {
   color: #3c763d;
   transition: all linear .5s;
   background-color: #dff0d8;
+  z-index: 2;
 }
 .success.ng-hide {
-  top: -100%;
+  bottom: -100%;
 }
 .success h2 {
   padding: 0;

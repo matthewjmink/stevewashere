@@ -9,8 +9,6 @@
     function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvider) {
         this.$get = RouterHelper;
 
-        $locationProvider.html5Mode(true);
-
         RouterHelper.$inject = ['$state'];
         function RouterHelper($state) {
             var hasOtherwise = false;
@@ -28,6 +26,7 @@
                 states.forEach(function(state) {
                     $stateProvider.state(state.state, state.config);
                 });
+                $urlRouterProvider.when('', '/');
                 if (otherwisePath && !hasOtherwise) {
                     hasOtherwise = true;
                     $urlRouterProvider.otherwise(otherwisePath);

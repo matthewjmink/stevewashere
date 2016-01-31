@@ -10,7 +10,7 @@
         };
 
         function getLocations() {
-            var firebaseRef = new Firebase('https://stevewashere.firebaseio.com/locations');
+            var firebaseRef = new Firebase('https://iwashere.firebaseio.com/locations');
             var locations = $firebaseArray(firebaseRef);
             return locations.$loaded()
                 .then(getLocationsComplete)

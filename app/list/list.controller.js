@@ -12,6 +12,7 @@
 
         getLocations().then(function (locations) {
             vm.locations = locations.features;
+            console.log(vm.locations);
         });
 
         ////////////
