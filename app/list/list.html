@@ -1,6 +1,14 @@
 <div class="page-content">
     <h2>Client List</h2>
-    <div ng-repeat="location in list.locations">
-        <h4>{{location.properties.name}}</h4>
+    <div class="filter-bar">
+        <strong>Sort by</strong>
+        <select ng-model="list.sort" ng-options="option.label for option in list.sortOptions"></select>
+    </div>
+    <div class="client-list">
+        <div class="client" ng-repeat="location in list.locations | orderBy:list.sort.value" ng-style="list.getColor(location.properties.last_checkin)">
+            <h4>{{location.properties.name}}</h4>
+            <strong>Last check-in:</strong>
+            {{location.properties.last_checkin | date: "MM/dd/yyyy 'at' h:mma"}}
+        </div>
     </div>
 </div>

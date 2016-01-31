@@ -1,0 +1,29 @@
+.client-list {
+    margin-top: 2em;
+}
+.client-list .client {
+    padding: 1em;
+    padding-left: 1.25em;
+    border-bottom: 1px solid #cdcdcd;
+    line-height: 1em;
+    position: relative;
+}
+.client-list .client:first-child {
+    border-top: 1px solid #ccc;
+}
+.client-list .client h4{
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+}
+.client-list .client:before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    border-left: 8px solid red;
+    border-left-color: inherit;
+    top: 5px;
+    bottom: 5px;
+    left: 0;
+    box-shadow: 0 0 1px rgba(0,0,0,.5),0 0 1px rgba(0,0,0,.5),0 0 1px rgba(0,0,0,.5);
+}

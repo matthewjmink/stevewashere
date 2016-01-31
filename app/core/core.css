@@ -4,6 +4,10 @@ html, body, ui-view, #map {
   margin: 0;
   padding: 0;
 }
+body {
+  background-color: #E9E5DC;
+  color: rgba(0,0,0,.75);
+}
 body > header {
   position: absolute;
   left: 0;
@@ -25,6 +29,12 @@ body > header > h1 {
   font-weight: 700;
   text-transform: uppercase;
   padding: 14px 60px 10px;
+}
+h2 {
+  font-size: 36px;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 .checkin-container {
   text-align: center;
@@ -95,4 +105,12 @@ body > header > h1 {
 
   }
 }
-
+.page-content {
+  padding: 10px 20px;
+}
+.filter-bar {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
