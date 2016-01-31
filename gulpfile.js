@@ -37,8 +37,8 @@ gulp.task('inject', function () {
 });
 
 gulp.task('images', function(){
-    return gulp.src('app/images/**/*.+(png|jpg|gif|svg)')
-        .pipe(gulp.dest('public/images'))
+    return gulp.src('app/**/*.+(png|jpg|gif|svg)')
+        .pipe(gulp.dest(appConfig.dist))
 });
 
 gulp.task('html', function(){
@@ -55,7 +55,7 @@ gulp.task('useref', function(){
 });
 
 gulp.task('clean', function() {
-  return del.sync(appConfig.dist);
+    return del.sync(appConfig.dist);
 })
 
 gulp.task('index', ['bower', 'inject']);

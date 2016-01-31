@@ -23,6 +23,7 @@ ui-view {
     left: 100%;
     margin-left: 10px;
     background: rgba(0,0,0,.6);
+    display:inline-block;
 }
 #primaryNavigation .navbar-toggle .icon-bar {
     background: #fff;
