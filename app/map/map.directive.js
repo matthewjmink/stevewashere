@@ -110,12 +110,16 @@ function map (colorService, $compile, $timeout) {
 
         }
 
+        /**
+         * The calculations in this function are not my own, but work very well! :)
+         *     getDistance() compares the latitude and longitude of two locations and
+         *     returns the distance (in miles)
+         */
         function getDistance (lat1, lng1, lat2, lng2) {
             var R = 6371;
-            var a =
-            0.5 - Math.cos((lat2 - lat1) * Math.PI / 180)/2 +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            (1 - Math.cos((lng2 - lng1) * Math.PI / 180))/2;
+            var a = 0.5 - Math.cos((lat2 - lat1) * Math.PI / 180)/2 +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                (1 - Math.cos((lng2 - lng1) * Math.PI / 180))/2;
 
             return R * 2 * Math.asin(Math.sqrt(a));
         }

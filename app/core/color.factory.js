@@ -5,14 +5,19 @@
         .module('app.core')
         .factory('colorService', colorService);
 
+    /**
+     * These functions are not my own work, though I cannot remember the source.
+     *     I have simply converted them to a factory so I can calculate hex values
+     *     from anywhere within the application.
+     */
     function colorService(){
         var trimLeft = /^[\s,#]+/,
-        trimRight = /\s+$/,
-        math = Math,
-        mathRound = math.round,
-        mathMin = math.min,
-        mathMax = math.max,
-        mathRandom = math.random;
+            trimRight = /\s+$/,
+            math = Math,
+            mathRound = math.round,
+            mathMin = math.min,
+            mathMax = math.max,
+            mathRandom = math.random;
 
         return {
             hsvToHex: hsvToHex,

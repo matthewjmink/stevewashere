@@ -1,3 +1,7 @@
+/**
+ * Angular UI Router Helper from Jon Papa
+ * https://github.com/johnpapa/angular-styleguide
+ */
 (function () {
     'use strict';
 
