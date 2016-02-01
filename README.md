@@ -5,6 +5,16 @@ Check out [the demo](https://iwashere.firebaseapp.com). **All sample clients are
 
 All of the development was, unless otherwise noted, my own work. For application structure and general guidelines/principles, I relied heavily on [John Papa's Angular Style Guide](https://github.com/johnpapa/angular-styleguide).
 
+###Technologies Used
+ - Angular
+ - Firebase
+ - Google Maps
+ - Bootstrap
+ - Git
+ - Gulp
+ - Bower
+ - Node/NPM
+
 ###Map or List
 Clients can be viewed on a map or list. The list can be sorted clients by name or date of last check-in, allowing the user to quickly see which clients are in the greatest need of attention.
 
